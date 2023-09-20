@@ -1,0 +1,27 @@
+{
+  "name": "Pega_DXIL_MyTwoColumnForm",
+  "label": "My Two Column Form",
+  "description": "My Two Column Form",
+  "organization": "Pega",
+  "version": "0.0.1",
+  "library": "DXIL",
+  "allowedApplications": [],
+  "componentKey": "Pega_DXIL_MyTwoColumnForm",
+  "type": "Template",
+  "subtype": "FORM",
+  "icon": "TwoColumn.svg",
+  "properties": [
+    {
+      "name": "A",
+      "label": "Region A",
+      "format": "CONTENTPICKER",
+      "allowCreatingGroup": true
+    },
+    {
+      "name": "B",
+      "label": "Region B",
+      "format": "CONTENTPICKER",
+      "allowCreatingGroup": true
+    }
+  ]
+}
