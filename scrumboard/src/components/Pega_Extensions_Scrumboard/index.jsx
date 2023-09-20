@@ -38,7 +38,7 @@ export default function PegaExtensionsScrumboard(props) {
 
   return (
     <StyledPegaExtensionsScrumboardWrapper>
-      <h1>Rad cration</h1>
+      <h1>Rad </h1>
     </StyledPegaExtensionsScrumboardWrapper>
   );
 }
