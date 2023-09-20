@@ -1,8 +1,21 @@
 {
-  "extends": "@pega/tsconfig/index.json",
-  "include": ["./**/*", ".storybook/**/*"],
   "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "noEmit": true,
-    "allowJs": true
-  }
+    "jsx": "react-jsx"
+  },
+  "include": ["src"],
+  "files": ["src/src/Pega_Extensions_Scrumboard/styles/styled.d.ts"]
 }

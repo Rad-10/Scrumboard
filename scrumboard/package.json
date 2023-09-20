@@ -29,7 +29,7 @@
     "lint:format": "prettier -c .",
     "lint:spelling": "cspell --no-progress **/*"
   },
-    "scriptsComments": {
+  "scriptsComments": {
     "build": "tsc -b tsconfig.build.json",
     "fix": "run-p -cl fix:*",
     "fix:es": "eslint --fix .",
@@ -48,15 +48,19 @@
   "dependencies": {
     "@pega/cosmos-react-core": "^3.0.11",
     "@pega/cosmos-react-work": "3.0.11",
+    "@reduxjs/toolkit": "^1.9.5",
     "dayjs": "^1.11.5",
     "polished": "^4.2.2",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-autosuggest": "^10.1.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^17.0.2",
     "react-is": "^18.2.0",
     "react-player": "^2.10.1",
     "react-redux": "^7.2.6",
+    "react-switch": "^7.0.0",
+    "redux": "^4.2.1",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
@@ -65,8 +69,8 @@
     "@pega/eslint-config": "^0.3.2",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
     "@storybook/addon-knobs": "^6.3.1",
+    "@storybook/addon-links": "^6.5.12",
     "@storybook/addon-storysource": "^6.5.12",
     "@storybook/builder-webpack5": "^6.5.12",
     "@storybook/manager-webpack5": "^6.5.12",
