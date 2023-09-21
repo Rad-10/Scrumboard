@@ -10,6 +10,7 @@ import ICard from '../../interfaces/ICard';
 import Badge from '../Badge';
 
 import { CardBorder, CardBottom, CardContainer } from './styles';
+import { Category } from 'emoji-mart';
 
 interface CardProps {
   card: ICard;
@@ -17,7 +18,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ card, index }) => {
-  const theme = useContext(ThemeContext); 
+  const theme = useContext(ThemeContext);
 
   const [backgroundColor, setBackgroundColor] = useState<string>(theme.colors.primary);
 
@@ -28,28 +29,29 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
       const categoryColor = getCategoryBackgroundColor(theme, card.category);
       setBackgroundColor(categoryColor);
     }
-  }, [card])
+  }, [card]);
 
   return (
     <Draggable draggableId={card.id} index={index}>
       {provided => (
-        <CardContainer 
-          onClick={() => toggleVisibility(card)} 
+        <CardContainer
+          onClick={() => toggleVisibility(card)}
           hideCard={card.hidden}
-          ref={provided.innerRef} 
-          {...provided.draggableProps} 
+          ref={provided.innerRef}
+          {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <CardBorder color={backgroundColor}/> 
+          <CardBorder color={backgroundColor} />
           <h3>{card.title}</h3>
           <CardBottom>
-            <Badge category={card.category}/>
-            <p>+ View More</p>
+            <Badge value={card.category} valuetype='CaseID' />
+            <Badge value={card.status} valuetype='CaseStatus' />
+            <Badge value={card.status} valuetype='AssignedTo' />
           </CardBottom>
         </CardContainer>
       )}
     </Draggable>
-  )
-}
+  );
+};
 
 export default Card;

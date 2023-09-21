@@ -4,6 +4,6 @@ enum IStatus {
   DOING = 'In progress',
   IN_REVIEW = 'Verify',
   DONE = 'Completed'
-} 
+}
 
 export default IStatus;

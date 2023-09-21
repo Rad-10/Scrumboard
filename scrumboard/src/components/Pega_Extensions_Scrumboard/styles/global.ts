@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
-import { SCREEN_BREAKPOINTS } from '../constants/breakpoints'
+import { createGlobalStyle } from 'styled-components';
+import { SCREEN_BREAKPOINTS } from '../constants/breakpoints';
 
 export default createGlobalStyle`
   * {
@@ -10,11 +10,12 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${({theme}) => theme.colors.background};
-    color: ${({theme}) => theme.colors.text_primary};
+    background: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text_primary};
     font-size: 14px;
     overflow-y: auto;
   }
+
 
   h1 {
     font-size: 3rem;
@@ -66,4 +67,4 @@ export default createGlobalStyle`
     background: ${({ theme }) => theme.colors.scrollbar_thumb_hover};
   }
 
-`
+`;

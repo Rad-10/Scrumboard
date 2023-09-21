@@ -1,31 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from 'styled-components';
-import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
-
-import ICategory from '../../interfaces/ICategory';
 import { BadgeContainer } from './styles';
 
 interface BadgeProps {
-  category: ICategory
+  value: string;
+  valuetype: string;
 }
 
-const Badge: React.FC<BadgeProps> = ({ category }) => {
-  const theme = useContext(ThemeContext); 
+const Badge: React.FC<BadgeProps> = ({ value, valuetype }) => {
+  const theme = useContext(ThemeContext);
 
   const [color, setColor] = useState<string>(theme.colors.primary);
 
   useEffect(() => {
-    if (category) {
-      const categoryColor = getCategoryBackgroundColor(theme, category);
-      setColor(categoryColor);
+    if (valuetype === 'CaseID') {
+      setColor('#131FC2');
+    } else if (valuetype === 'CaseStatus') {
+      setColor('#61D856');
+    } else {
+      // Set a default color if valuetype is neither 'category' nor 'status'
+      setColor(theme.colors.primary);
     }
-  }, [category])
+  }, [valuetype, theme.colors.primary]);
 
-  return ( 
+  return (
     <BadgeContainer color={color}>
-      <p>{category}</p>
+      <p>{value}</p>
     </BadgeContainer>
-  )
-}
+  );
+};
 
 export default Badge;

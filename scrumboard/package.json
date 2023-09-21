@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "startStorybook": "start-storybook --port 6040 --quiet",
+    "start": "start-storybook --port 6040 --quiet",
     "lint": "run-p -cl lint:*",
     "authenticate": "custom-dx-components authenticate",
     "buildComponent": "custom-dx-components buildComponent",

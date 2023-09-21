@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-
+import KanbanBoardTheme from './KanbanBoardTheme';
 import Switch from 'react-switch';
+import { Flex, Icon } from '@pega/cosmos-react-core';
 import { ThemeContext } from 'styled-components';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-
+import { ThemeProvider } from 'styled-components';
+import { DefaultTheme } from 'styled-components';
 import ICard from '../../interfaces/ICard';
 import IStatus from '../../interfaces/IStatus';
 import IColumn from '../../interfaces/IColumn';
@@ -15,14 +17,16 @@ import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import {
+  AddButtonContainer,
   Container,
   FiltersContainer,
   Header,
   LabelContainer,
   SearchAndFilters,
   StatusesColumnsContainer,
+  SwitchContainer,
   SwitchIcon,
-  TitleAndSwitch
+  TitleContainer
 } from './styles';
 import { setColumns } from '../../store/slices/columns.slice';
 import { filterCards, setCards } from '../../store/slices/cards.slice';
@@ -40,7 +44,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   const { columns } = useAppSelector(state => state.columns);
   const { visible } = useModal();
 
-  const [selectedCategories, setSelectedCategories] = useState<ICategory[]>(
+  const [selectedCategories, setSelectedCategories] = useState<Array<ICategory>>(
     Object.values(ICategory)
   );
 
@@ -54,7 +58,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
     if (destination.droppableId === source.droppableId && destination.index === source.index)
       return;
 
-    const updatedCards: ICard[] = cards.map(card => {
+    const updatedCards: Array<ICard> = cards.map(card => {
       if (card.id === draggableId) {
         const status: IStatus = destination.droppableId as IStatus;
 
@@ -72,7 +76,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
       column => column.id === destination.droppableId
     ) as IColumn;
 
-    //Moving cards in the same column
+    // Moving cards in the same column
     if (sourceColumn === destinationColumn) {
       const newColumnCardsIds = [...destinationColumn.cardsIds];
 
@@ -84,7 +88,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
         cardsIds: newColumnCardsIds
       };
 
-      const updatedColumns: IColumn[] = columns.map(column => {
+      const updatedColumns: Array<IColumn> = columns.map(column => {
         if (column.id === newDestinationColumn.id) return newDestinationColumn;
         else return column;
       });
@@ -95,7 +99,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
       return;
     }
 
-    //Moving cards from one column to another
+    // Moving cards from one column to another
     const sourceCardsIds = [...sourceColumn.cardsIds];
     sourceCardsIds.splice(source.index, 1);
 
@@ -112,7 +116,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
       cardsIds: destinationCardsIds
     };
 
-    const updatedColumns: IColumn[] = columns.map(column => {
+    const updatedColumns: Array<IColumn> = columns.map(column => {
       if (column.id === newDestinationColumn.id) return newDestinationColumn;
       if (column.id === newSourceColumn.id) return newSourceColumn;
       else return column;
@@ -140,22 +144,25 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
 
   return (
     <>
-      <Container>
-        <Header>
-          <TitleAndSwitch>
-            <h1>
-              Scrum <span>Board</span>
-            </h1>
-            <Switch
-              onChange={toggleTheme}
-              checked={title === 'light'}
-              checkedIcon={<SwitchIcon src='sunu' alt='Sun' />}
-              uncheckedIcon={<SwitchIcon src='moonu' alt='Moon' />}
-              onColor={colors.primary}
-              offColor={colors.switch}
-            />
-          </TitleAndSwitch>
-          {/*     <SearchAndFilters>
+      <ThemeProvider theme={theme as KanbanBoardTheme}>
+        <Container>
+          <Header>
+            <TitleContainer>
+              <h1>
+                Scrum <span>Board</span>
+              </h1>
+            </TitleContainer>
+            <SwitchContainer>
+              <Switch
+                onChange={toggleTheme}
+                checked={title === 'light'}
+                checkedIcon={<Icon style={{ height: 27, width: 27 }} name='sun-solid' />}
+                uncheckedIcon={<Icon style={{ height: 27, width: 27 }} name='moon-solid' />}
+                onColor={colors.placeholder}
+                offColor={colors.switch}
+              />
+            </SwitchContainer>
+            {/*     <SearchAndFilters>
             <SearchInput/>
             <FiltersContainer>
               {Object.values(ICategory).map(category => (
@@ -176,25 +183,30 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
               ))}
           </FiltersContainer>
               </SearchAndFilters> */}
-        </Header>
+          </Header>
 
-        <StatusesColumnsContainer>
-          <DragDropContext onDragEnd={onDragEnd}>
-            {columns.map((column, index) => {
-              const cardsArray: ICard[] = [];
+          <StatusesColumnsContainer>
+            <DragDropContext onDragEnd={onDragEnd}>
+              {columns.map((column, index) => {
+                const cardsArray: Array<ICard> = [];
 
-              column.cardsIds.forEach(cardId => {
-                const foundedCard = cards.find(card => card.id === cardId);
-                if (foundedCard) cardsArray.push(foundedCard);
-              });
+                column.cardsIds.forEach(cardId => {
+                  const foundedCard = cards.find(card => card.id === cardId);
+                  if (foundedCard) cardsArray.push(foundedCard);
+                });
 
-              return <Column key={column.id} index={index} status={column.id} cards={cardsArray} />;
-            })}
-          </DragDropContext>
-        </StatusesColumnsContainer>
-        <ButtonAddCard />
-      </Container>
-      <Modal visible={visible} />
+                return (
+                  <Column key={column.id} index={index} status={column.id} cards={cardsArray} />
+                );
+              })}
+            </DragDropContext>
+          </StatusesColumnsContainer>
+          <AddButtonContainer>
+            <ButtonAddCard />
+          </AddButtonContainer>
+        </Container>
+        <Modal visible={visible} />
+      </ThemeProvider>
     </>
   );
 };
