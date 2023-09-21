@@ -42,7 +42,24 @@ export default function PegaExtensionsScrumboard(props) {
 
   const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState([]);
+  useEffect(() => {
+    setIsLoading(true);
+    const dataViewName = 'D_AllSprintItems';
+    const parameters = {
+      SprintInsKey: 'PEGAPROJMGMT-WORK SPR-63051'
+    };
 
+    const context = 'app/primary_1';
+    PCore.getDataPageUtils()
+      .getDataAsync(dataViewName, context, parameters)
+      .then(response => setItems(response))
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+  console.log('items');
+  const List = items.pxResults;
+  console.log(List);
   return (
     <StyledPegaExtensionsScrumboardWrapper>
       <App></App>
