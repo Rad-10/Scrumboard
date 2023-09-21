@@ -17,5 +17,5 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
-  "files": ["src/src/Pega_Extensions_Scrumboard/styles/styled.d.ts"]
+  "files": ["src/components/Pega_Extensions_Scrumboard/styles/styled.d.ts"]
 }
