@@ -1,6 +1,6 @@
-import ICard from "../interfaces/ICard";
-import ICategory from "../interfaces/ICategory";
-import IStatus from "../interfaces/IStatus";
+import ICard from '../interfaces/ICard';
+import ICategory from '../interfaces/ICategory';
+import IStatus from '../interfaces/IStatus';
 
 const mockCards: ICard[] = [
   {
@@ -11,7 +11,7 @@ const mockCards: ICard[] = [
     status: IStatus.DOING,
     hidden: false
   },
- 
+
   {
     id: '74d031c0-59bb-4f4b-9910-71bb1c88c624',
     category: ICategory.FEATURE,
@@ -43,7 +43,7 @@ const mockCards: ICard[] = [
     description: '',
     status: IStatus.IN_REVIEW,
     hidden: false
-  },
-]
+  }
+];
 
 export default mockCards;

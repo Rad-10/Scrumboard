@@ -22,6 +22,16 @@ window.PCore.getLocaleUtils = () => {
   };
 };
 
+window.PCore.getDataPageUtils = () => {
+  return {
+    getDataAsync: () => {
+      return new Promise(resolve => {
+        resolve(operatorDetails);
+      });
+    }
+  };
+};
+
 window.PCore.getUserApi = () => {
   return {
     getOperatorDetails: () => {
@@ -33,7 +43,6 @@ window.PCore.getUserApi = () => {
 };
 
 export const basePegaExtensionsScrumboard = () => {
-
   const props = {
     label: configProps.label,
     createLabel: configProps.createLabel,
@@ -48,19 +57,31 @@ export const basePegaExtensionsScrumboard = () => {
       return {
         getActionsApi: () => {
           return {
-            updateFieldValue: () => {/* nothing */},
-            triggerFieldChange: () => {/* nothing */}
+            updateFieldValue: () => {
+              /* nothing */
+            },
+            triggerFieldChange: () => {
+              /* nothing */
+            }
           };
         },
-        ignoreSuggestion: () => {/* nothing */},
-        acceptSuggestion: () => {/* nothing */},
-        setInheritedProps: () => {/* nothing */},
-        resolveConfigProps: () => {/* nothing */}
+        ignoreSuggestion: () => {
+          /* nothing */
+        },
+        acceptSuggestion: () => {
+          /* nothing */
+        },
+        setInheritedProps: () => {
+          /* nothing */
+        },
+        resolveConfigProps: () => {
+          /* nothing */
+        }
       };
     }
-};
+  };
 
-return (
+  return (
     <>
       <PegaExtensionsScrumboard {...props} />
     </>
